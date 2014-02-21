@@ -26,7 +26,7 @@ $twoGbFlavor = $computeService->flavor(4);
 
 $server1 = $computeService->server();
 $server1->create(array(
-    'name'     => 'SK web server 1',
+    'name'     => 'PHP web server 1',
     'image'    => $webServerImage,
     'flavor'   => $twoGbFlavor,
     'networks' => array(
@@ -42,7 +42,7 @@ $server1->waitFor(State::ACTIVE, null, function ($server) {
 
 $server2 = $computeService->server();
 $server2->create(array(
-    'name'     => 'SK Web server 2',
+    'name'     => 'PHP Web server 2',
     'image'    => $webServerImage,
     'flavor'   => $twoGbFlavor,
     'networks' => array(
@@ -84,7 +84,7 @@ $server2Node->condition = 'ENABLED';
 
 $loadBalancer->addVirtualIp('PUBLIC');
 $loadBalancer->create(array(
-    'name'     => 'SK load balancer - web',
+    'name'     => 'PHP load balancer - web',
     'port'     => 80,
     'protocol' => 'HTTP',
     'nodes'    => array($server1Node, $server2Node)
