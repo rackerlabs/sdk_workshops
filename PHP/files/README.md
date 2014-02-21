@@ -12,19 +12,19 @@ This workshop demonstrates the use of the Rackspace Compute Cloud Service.
 
 4. Install dependencies using Composer.
 
-```
-$ composer install
-```
+    ```
+    $ composer install
+    ```
 
 5. Setup environment variables for demo.
 
-```
-$ export RAX_USERNAME=<YOUR RACKSPACE CLOUD USERNAME HERE>
-$ export RAX_API_KEY=<YOUR RACKSPACE CLOUD API KEY HERE>
-```
+    ```
+    $ export RAX_USERNAME=<YOUR RACKSPACE CLOUD USERNAME HERE>
+    $ export RAX_API_KEY=<YOUR RACKSPACE CLOUD API KEY HERE>
+    ```
 
 6. Read through the demo script (`main.php`), then run it!
 
-```
-$ php main.php
-```
+    ```
+    $ php main.php
+    ```
