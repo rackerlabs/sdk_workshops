@@ -48,7 +48,5 @@ const TEMP_URL_ALLOWED_METHOD = 'GET';
 $tempUrl = $object->getTemporaryUrl(TEMP_URL_TTL, TEMP_URL_ALLOWED_METHOD);
 
 printf("Temporary download URL = %s\n", $tempUrl);
+printf("Quick! Visit this URL in the next %d seconds and you will be able to download the %s image.\n", TEMP_URL_TTL, $destinationFilename);
 
-//
-// 5. View photo in browser.
-//
