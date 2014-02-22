@@ -1,6 +1,6 @@
 ## What is this?
 
-This workshop demonstrates the use of the Rackspace Cloud Files Service.
+This workshop demonstrates the use of the Rackspace Cloud Servers Service.
 
 ## How do I get started?
 
