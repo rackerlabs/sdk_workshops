@@ -1,6 +1,6 @@
 ## What is this?
 
-This workshop demonstrates the use of the Rackspace Cloud Files Service.
+This workshop demonstrates the use of the Rackspace Cloud Servers Service.
 
 ## How do I get started?
 
@@ -21,6 +21,7 @@ This workshop demonstrates the use of the Rackspace Cloud Files Service.
     ```
     $ export RAX_USERNAME=<YOUR RACKSPACE CLOUD USERNAME HERE>
     $ export RAX_API_KEY=<YOUR RACKSPACE CLOUD API KEY HERE>
+    $ export RAX_IMAGE_ID=<ID OF IMAGE TO USE FOR CLOUD SERVER INSTANCES>
     ```
 
 6. Read through the demo script (`main.php`), then run it!
