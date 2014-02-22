@@ -26,9 +26,21 @@ $twoGbFlavor = $computeService->flavor(4);
 
 $server1 = $computeService->server();
 
-printf("Creating server 1 instance...");
+printf("Creating server 1 instance...\n");
 $server1->create(array(
     'name'     => 'PHP web server 1',
+    'image'    => $webServerImage,
+    'flavor'   => $twoGbFlavor,
+    'networks' => array(
+        $computeService->network(Network::RAX_PRIVATE)
+    )
+));
+
+$server2 = $computeService->server();
+
+printf("Creating server 2 instance...\n");
+$server2->create(array(
+    'name'     => 'PHP Web server 2',
     'image'    => $webServerImage,
     'flavor'   => $twoGbFlavor,
     'networks' => array(
@@ -41,18 +53,6 @@ $server1->waitFor(State::ACTIVE, null, function ($server) {
     printf("Server 1 build progress: %d%%\n", $server->progress);
 
 });
-
-$server2 = $computeService->server();
-
-printf("Creating server 2 instance...");
-$server2->create(array(
-    'name'     => 'PHP Web server 2',
-    'image'    => $webServerImage,
-    'flavor'   => $twoGbFlavor,
-    'networks' => array(
-        $computeService->network(Network::RAX_PRIVATE)
-    )
-));
 
 $server2->waitFor(State::ACTIVE, null, function ($server) {
 
