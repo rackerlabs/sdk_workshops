@@ -1,1 +1,8 @@
 .DS_Store
+*.class
+.classpath
+.project
+target/
+*.prefs
+*.jar
+
