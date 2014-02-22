@@ -25,6 +25,8 @@ $webServerImage = $computeService->image(getenv('RAX_IMAGE_ID'));
 $twoGbFlavor = $computeService->flavor(4);
 
 $server1 = $computeService->server();
+
+printf("Creating server 1 instance...");
 $server1->create(array(
     'name'     => 'PHP web server 1',
     'image'    => $webServerImage,
@@ -41,6 +43,8 @@ $server1->waitFor(State::ACTIVE, null, function ($server) {
 });
 
 $server2 = $computeService->server();
+
+printf("Creating server 2 instance...");
 $server2->create(array(
     'name'     => 'PHP Web server 2',
     'image'    => $webServerImage,
