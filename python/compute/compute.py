@@ -72,15 +72,6 @@ flavor = [flav for flav in flavors
         if flav.ram == 1024
         and flav.disk == 20][0]
 
-# Create the isolated network
-print
-print "Creating the isolated network"
-new_network_name = "scale12x_NW"
-new_network_cidr = "192.168.0.0/24"
-new_net = cnw.create(new_network_name, cidr=new_network_cidr)
-add_to_cleanup("CNW", new_net)
-print "Network created:", new_net
-
 # Store the public key
 keyfile = os.path.expanduser("~/.ssh/id_rsa.pub")
 with open(keyfile, "r") as kf:

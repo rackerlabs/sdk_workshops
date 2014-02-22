@@ -77,10 +77,6 @@ print "Expires at:", expire_time.strftime("%H:%M:%S")
 answer = raw_input("Press any key to continue...")
 
 print "Publishing container to the CDN..."
-cont.make_private()
-
-answer = raw_input("Press any key to continue...")
-
-
-
-
+cont.make_public()
+print "Published."
+print "CDN URI:", cont.cdn_uri    
