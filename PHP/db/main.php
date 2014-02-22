@@ -73,18 +73,20 @@ $dbServerNode->port = 3306;
 $dbServerNode->condition = 'ENABLED';
 
 $loadBalancer->addVirtualIp('PUBLIC');
-$loadBalancer->create(array(
-    'name'     => 'My proxy load balancer',
-    'port'     => 3306,
-    'protocol' => 'MYSQL',
-    'nodes'    => array($dbServerNode)
-));
+$loadBalancer->name = 'PHP load balancer - DB';
+$loadBalancer->port = 3306;
+$loadBalancer->protocol = 'MYSQL';
+$loadBalancer->addNode($dbServerNode->address, $dbServerNode->port);
+
+printf("Creating load balancer %s...\n", $loadBalancer->name);
+$loadBalancer->create();
 
 $loadBalancer->waitFor(State::ACTIVE, null, function ($lb) {
+    printf("Load balancer build status: %s\n", $lb->status);
 });
 
 foreach ($loadBalancer->virtualIps as $vip) {
     if ($vip->type == 'PUBLIC') {
-        printf("Load balancer public IPv%d address: %s\n", $vip->ipVersion, $vip->address);
+        printf("Load balancer public %s address: %s\n", $vip->ipVersion, $vip->address);
     }
 }
