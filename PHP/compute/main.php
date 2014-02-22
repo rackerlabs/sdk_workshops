@@ -83,22 +83,25 @@ $server2Node->condition = 'ENABLED';
 //
 
 $loadBalancer->addVirtualIp('PUBLIC');
-$loadBalancer->create(array(
-    'name'     => 'PHP load balancer - web',
-    'port'     => 80,
-    'protocol' => 'HTTP',
-    'nodes'    => array($server1Node, $server2Node)
-));
+$loadBalancer->name = 'PHP load balancer - web';
+$loadBalancer->port = 80;
+$loadBalancer->protocol = 'HTTP';
+$loadBalancer->addNode($server1Node->address, $server1Node->port);
+$loadBalancer->addNode($server2Node->address, $server2Node->port);
+
+printf("Creating load balancer %s...\n", $loadBalancer->name);
+$loadBalancer->create();
 
 //
 // 6. Get public IP address of load balancer
 //
 
 $loadBalancer->waitFor(State::ACTIVE, null, function ($lb) {
+    printf("Load balancer build status: %s\n", $lb->status);
 });
 
 foreach ($loadBalancer->virtualIps as $vip) {
     if ($vip->type == 'PUBLIC') {
-        printf("Load balancer public IPv%d address: %s\n", $vip->ipVersion, $vip->address);
+        printf("Load balancer public %s address: %s\n", $vip->ipVersion, $vip->address);
     }
 }
