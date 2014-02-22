@@ -18,8 +18,6 @@
 
 
 import json
-import os
-import time
 
 import pyrax
 import pyrax.utils as utils
@@ -42,11 +40,6 @@ cdb = pyrax.cloud_databases
 cnw = pyrax.cloud_networks
 dns = pyrax.cloud_dns
 
-start = time.time()
-print "*" * 66
-print "Starting at", time.ctime() 
-print "*" * 66
-
 
 def add_to_cleanup(svc, reso):
     filename = "scaledemo.json"
@@ -62,6 +55,7 @@ def add_to_cleanup(svc, reso):
         cleanup[svc] = [reso.id]
     with open(filename, "w") as ff:
         json.dump(cleanup, ff)
+
 
 # Get the available flavors
 flavors = cdb.list_flavors()
