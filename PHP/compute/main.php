@@ -62,32 +62,18 @@ $server2->waitFor(State::ACTIVE, null, function ($server) {
 
 $loadBalancerService = $client->loadBalancerService('cloudLoadBalancers', 'DFW');
 
-$loadBalancer = $loadBalancerService->loadBalancer();
-
-//
-// 4. Create nodes using server IPs
-//
-
-$server1Node = $loadBalancer->node();
-$server1Node->address = $server1->addresses->private[0]->addr;
-$server1Node->port = 80;
-$server1Node->condition = 'ENABLED';
-
-$server2Node = $loadBalancer->node();
-$server2Node->address = $server2->addresses->private[0]->addr;
-$server2Node->port = 80;
-$server2Node->condition = 'ENABLED';
-
 //
 // 5. Create load balancer with those two nodes on HTTP/80
 //
 
-$loadBalancer->addVirtualIp('PUBLIC');
+$loadBalancer = $loadBalancerService->loadBalancer();
+
 $loadBalancer->name = 'PHP load balancer - web';
+$loadBalancer->addNode($server1->addresses->private[0]->addr, 80);
+$loadBalancer->addNode($server2->addresses->private[0]->addr, 80);
 $loadBalancer->port = 80;
 $loadBalancer->protocol = 'HTTP';
-$loadBalancer->addNode($server1Node->address, $server1Node->port);
-$loadBalancer->addNode($server2Node->address, $server2Node->port);
+$loadBalancer->addVirtualIp('PUBLIC');
 
 printf("Creating load balancer %s...\n", $loadBalancer->name);
 $loadBalancer->create();

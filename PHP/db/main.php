@@ -67,16 +67,11 @@ $loadBalancerService = $client->loadBalancerService('cloudLoadBalancers', 'DFW')
 
 $loadBalancer = $loadBalancerService->loadBalancer();
 
-$dbServerNode = $loadBalancer->node();
-$dbServerNode->address = $dbInstance->hostname;
-$dbServerNode->port = 3306;
-$dbServerNode->condition = 'ENABLED';
-
-$loadBalancer->addVirtualIp('PUBLIC');
 $loadBalancer->name = 'PHP load balancer - DB';
+$loadBalancer->addNode($dbInstance->hostname, 3306);
 $loadBalancer->port = 3306;
 $loadBalancer->protocol = 'MYSQL';
-$loadBalancer->addNode($dbServerNode->address, $dbServerNode->port);
+$loadBalancer->addVirtualIp('PUBLIC');
 
 printf("Creating load balancer %s...\n", $loadBalancer->name);
 $loadBalancer->create();
