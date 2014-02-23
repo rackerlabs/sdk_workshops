@@ -22,7 +22,7 @@ $computeService = $client->computeService('cloudServersOpenStack', 'DFW');
 //
 
 $webServerImage = $computeService->image(getenv('RAX_IMAGE_ID'));
-$twoGbFlavor = $computeService->flavor(4);
+$twoGbFlavor = $computeService->flavor(2);
 
 $server1 = $computeService->server();
 
@@ -90,8 +90,13 @@ $loadBalancer->waitFor(State::ACTIVE, null, function ($lb) {
     printf("Load balancer build status: %s\n", $lb->status);
 });
 
+echo str_repeat('=', 80);
+printf("Server 1 private IP address: %s\n", $server1->addresses->private[0]->addr);
+printf("Server 2 private IP address: %s\n", $server2->addresses->private[0]->addr);
+echo str_repeat('-', 80);
 foreach ($loadBalancer->virtualIps as $vip) {
     if ($vip->type == 'PUBLIC') {
         printf("Load balancer public %s address: %s\n", $vip->ipVersion, $vip->address);
     }
 }
+echo str_repeat('=', 80);
