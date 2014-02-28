@@ -81,8 +81,6 @@ add_to_cleanup("CSK", key)
 
 # Create two servers with only ServiceNet
 networks = [{"net-id": cnw.SERVICE_NET_ID}]
-print
-print "Creating the two app servers"
 server1 = cs.servers.create("scale12x_Srv1",
         image=IMAGE_ID, flavor=flavor, key_name="scale_key",
         nics=networks)
